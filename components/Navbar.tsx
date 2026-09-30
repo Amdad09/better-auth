@@ -14,7 +14,31 @@ export default function Navbar() {
             </div>
         );
     }
-
+    const links = (
+        <>
+            <li>
+                <Link href="/">Home</Link>
+            </li>
+            <li>
+                <Link
+                    href="/dashboard"
+                    className="font-medium text-accent"
+                    aria-current="page"
+                >
+                    Dashboard
+                </Link>
+            </li>
+            {session?.user && (<>
+                <li>
+                    <Link href="/profile">Profile</Link>
+                </li>
+                <li>
+                    <Link href="/settings">Settings</Link>
+                </li>
+                </>
+            )}
+        </>
+    );
     const authLinks = (
         <>
             {session?.user ? (
@@ -74,21 +98,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 <ul className="hidden items-center gap-4 md:flex">
-                    <li>
-                        <Link href="/">Features</Link>
-                    </li>
-                    <li>
-                        <Link
-                            href="#"
-                            className="font-medium text-accent"
-                            aria-current="page"
-                        >
-                            Dashboard
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="#">Pricing</Link>
-                    </li>
+                    {links}
                 </ul>
                 <div className="hidden items-center gap-4 md:flex">
                     {authLinks}
@@ -97,24 +107,7 @@ export default function Navbar() {
             {isMenuOpen && (
                 <div className="border-t border-separator md:hidden">
                     <ul className="flex flex-col gap-2 p-4">
-                        <li>
-                            <Link href="#" className="block py-2">
-                                Features
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="#"
-                                className="block py-2 font-medium text-accent"
-                            >
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#" className="block py-2">
-                                Pricing
-                            </Link>
-                        </li>
+                        {links}
                         <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
                             {authLinks}
                         </li>
